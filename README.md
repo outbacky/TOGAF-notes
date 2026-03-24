@@ -1,7 +1,6 @@
 # TOGAF® EA — Visual Study Notes
 
-![TOGAF](https://img.shields.io/badge/TOGAF®-10th%20Edition-E05D26?style=flat-square) ![Standard](https://img.shields.io/badge/Standard-The%20Open%20Group-1A4A8A?style=flat-square) ![Diagrams](https://img.shields.io/badge/Diagrams-v3.0%20%7C%202025-2E7D32?style=flat-square)
-
+![TOGAF](https://img.shields.io/badge/TOGAF®-10th%20Edition-E05D26?style=flat-square) ![Standard](https://img.shields.io/badge/Standard-The%20Open%20Group-1A4A8A?style=flat-square)
 > Based on the **TOGAF® Standard, 10th Edition** 
 
 ---
