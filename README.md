@@ -33,7 +33,11 @@
 
 ## 1. What is TOGAF?
 
-**TOGAF** (The Open Group Architecture Framework) provides a structured approach to designing, planning, implementing, and governing enterprise information architecture.
+**TOGAF** (The Open Group Architecture Framework) is a globally recognised framework for practising Enterprise Architecture. Think of it as a comprehensive "how-to guide" for organisations that want to design and manage their business and technology landscape in a structured, repeatable way — rather than making ad-hoc decisions that create complexity over time.
+
+TOGAF is owned and maintained by **The Open Group**, a vendor-neutral consortium. The framework does not prescribe specific tools or technologies; instead it provides a methodology, a vocabulary, and a set of best practices that can be adapted to any organisation. The current version is the **10th Edition**, which expanded the framework's coverage of agile approaches, value streams, and security.
+
+At its core, TOGAF organises an enterprise into **four architecture domains** — Business, Data, Application, and Technology (collectively known as **BDAT**). These four domains represent a complete picture of how an organisation operates and is supported by its technology.
 
 ```mermaid
 mindmap
@@ -59,7 +63,11 @@ mindmap
 
 ## 2. The Architecture Development Method (ADM)
 
-The ADM is the **core iterative process** of TOGAF — a structured cycle of phases for developing and managing enterprise architecture.
+The **ADM** is the heart of TOGAF — a structured, iterative cycle of phases that guides architects through the process of developing, approving, and governing enterprise architecture. Rather than a one-time project, the ADM is designed to be repeated continuously as the organisation evolves.
+
+The cycle begins with the **Preliminary phase** (setting up the EA capability), moves through phases A to H (vision, design, implementation, and governance), and loops back to Phase A whenever a new architectural challenge arises. **Requirements Management** sits at the centre of the wheel and feeds into every phase — it is not a phase itself but a continuous process that ensures architecture work always traces back to real business needs.
+
+The key insight of the ADM is that architecture is never "done." Every significant change — a new business strategy, a technology shift, a merger — triggers a new pass through the cycle, starting at whichever phase is appropriate for the scale of the change.
 
 ### ADM Phase Flow
 
@@ -83,6 +91,8 @@ flowchart TB
 
 ### ADM Iteration Types
 
+Not every change requires running all phases from scratch. The ADM defines **four iteration types** that allow architects to re-enter the cycle at the right level of scope. A small technology update might only need a Governance Iteration, while a major strategic shift could require a full Architecture Development Iteration from Phase A.
+
 ```mermaid
 flowchart LR
     subgraph CAP ["Architecture Capability Iteration"]
@@ -104,6 +114,8 @@ flowchart LR
 
 ### Reiteration & Change Types
 
+When a change request arrives, the architect must first classify it to determine how far back in the ADM cycle to go. A **Simplification** change (e.g. removing a redundant application) may only need a single-phase rework. A **RE-Architecture** change (e.g. moving from on-premises to cloud) could require starting again from Phase A or even the Preliminary phase to revisit principles and governance.
+
 | Change Type | Description | ADM Impact |
 |---|---|---|
 | **RE-Architecture** | Major structural change | Back to Phase A or Preliminary |
@@ -119,7 +131,13 @@ flowchart LR
 
 ## 3. Architecture Scoping
 
-Architecture scope is defined across **three dimensions**:
+Before any architecture work begins, the team must define the **scope** of the engagement. Without clear boundaries, EA work can expand endlessly or produce outputs that are too high-level to be useful.
+
+TOGAF defines scope across **three dimensions**: how wide the architecture is (Breadth), how deep it goes into detail (Depth), and at what organisational layer it operates (Level). For example, a scoping decision might be: "We will cover the full enterprise (wide breadth), but only down to the logical design level (medium depth), focused on the segment/portfolio level (mid-level)."
+
+The **DPBoK four engagement contexts** further refine scope by describing the purpose of the EA engagement — from teams delivering a specific solution all the way up to enterprise-wide strategic planning.
+
+### Three Scope Dimensions
 
 ```mermaid
 flowchart LR
@@ -146,6 +164,8 @@ flowchart LR
 ```
 
 ### Four EA Engagement Contexts (DPBoK)
+
+These four contexts describe the scale and purpose of the EA engagement. **Context I** is the most tactical — an EA team embedded within a project team helping deliver a specific solution. **Context IV** is the most strategic — an enduring EA capability that shapes the entire organisation's long-term direction. Most organisations operate across multiple contexts simultaneously.
 
 ```mermaid
 flowchart BT
@@ -177,7 +197,9 @@ flowchart BT
 
 ## 4. Architecture Abstraction Levels
 
-TOGAF defines **four abstraction levels** that apply across all ADM phases:
+When designing architecture, different stakeholders need different levels of detail. A CEO needs to understand *why* the organisation is changing; a developer needs to know *exactly what* to build. TOGAF addresses this with **four abstraction levels** — a progression from the most abstract (big picture) down to the most concrete (implementation-ready).
+
+Each level builds on the one above it. You cannot define a meaningful logical design without first agreeing on the conceptual model, and you cannot agree on the conceptual model without first understanding the contextual drivers. Moving down the stack means adding more detail and fewer options; moving back up means questioning assumptions.
 
 ```mermaid
 flowchart TD
@@ -220,7 +242,11 @@ flowchart TD
 
 ## 5. Architecture Building Blocks (ABBs & SBBs)
 
-Building Blocks are **reusable, composable units** of architecture capability.
+One of TOGAF's most powerful ideas is that architecture can be assembled from **reusable components** — called Building Blocks — rather than designed from scratch every time. This is exactly the same principle as software libraries, LEGO bricks, or modular construction: define a component once, test it, and reuse it across many contexts.
+
+An **Architecture Building Block (ABB)** is a logical, abstract description of a capability — it says *what* the architecture needs (e.g. "an identity management service") without specifying *how* it will be built. A **Solution Building Block (SBB)** is the concrete realisation — the actual product, technology, or system that fulfils the ABB (e.g. "Microsoft Entra ID"). The same ABB can be fulfilled by different SBBs in different contexts, making the architecture flexible and vendor-neutral at the design level.
+
+Building Blocks are organised in a **hierarchy** from highly specific (custom-built for a particular capability) down to generic foundation blocks that are reusable across many organisations and industries.
 
 ### ABB vs. SBB
 
@@ -248,6 +274,8 @@ flowchart LR
 
 ### Building Block Hierarchy (Naval Vessel Example)
 
+The hierarchy is illustrated using a naval vessel. Level 1 is the most specific (a particular ship class), while Level 4 contains the most generic, reusable foundation blocks that could apply across many industries. When building a new architecture, you start by checking whether suitable blocks already exist at Level 4 or 3 before investing in custom Level 1 or 2 work.
+
 ```mermaid
 flowchart TD
     L1["LEVEL 1 — Capability Specific
@@ -270,15 +298,18 @@ flowchart TD
     style L4 fill:#E3F2FD,stroke:#0D47A1,color:#000
 ```
 
-### Key Principles
-
-- Blocks are **reused** from the Enterprise Continuum repository
-- Blocks can be **composed** into Superblocks
-- Goal: **SMART** Building Blocks — filtered to only what is needed to realise the Target Architecture via the **A.D.D.**
+**Key principles:**
+- Blocks are **reused** from the Enterprise Continuum repository, saving time and ensuring consistency
+- Blocks can be **composed** into larger Superblocks for complex capabilities
+- The goal is **SMART** Building Blocks — only the blocks genuinely needed to realise the Target Architecture are selected, keeping the A.D.D. focused and deliverable
 
 ---
 
 ## 6. Key Deliverables & Artefacts
+
+Architecture work produces tangible outputs at each stage of the ADM. These **deliverables** serve two purposes: they communicate the architecture to stakeholders, and they create a formal record that governs what gets built and how. Without these artefacts, architecture work becomes invisible and ungovernable.
+
+The most important deliverable is the **Architecture Definition Document (A.D.D.)** — the central record of the architecture design. It starts as a rough draft (v0.1) during the early phases and is progressively refined through stakeholder review and sign-off until it becomes the Approved Version (v1.0) that authorises implementation. The **Implementation & Migration Plan (I&MP)** then translates the approved architecture into a concrete roadmap of projects and work packages.
 
 ```mermaid
 timeline
@@ -299,7 +330,7 @@ timeline
 
 | Deliverable | Phase | Purpose |
 |---|---|---|
-| **A.R.S.** — Architecture Requirements Specs | A | Capture requirements per phase |
+| **A.R.S.** — Architecture Requirements Specs | A | Capture and track requirements per phase |
 | **A.D.D.** — Architecture Definition Document | A–D | Central architecture design record |
 | **I&MP** — Implementation & Migration Plan | F | Work packages, projects, transition steps |
 | **Architecture Design & Definition Contracts** | G | Govern delivery between architects & business |
@@ -308,6 +339,10 @@ timeline
 ---
 
 ## 7. RAW vs. SAW
+
+When beginning an architecture engagement, the initial picture of "all the work that needs to be done" is often enormous. This full, unfiltered view is called the **Required Architecture Work (RAW)**. If you tried to deliver all of it at once, the programme would be unmanageable.
+
+**Scoped Architecture Work (SAW)** is the filtered, realistic subset — the portion of the RAW that has been prioritised, risk-assessed, and approved for actual delivery. The process of moving from RAW to SAW involves negotiation with stakeholders, application of principles, and trade-off analysis. Exceptions arise when something in the RAW does not fit neatly into the SAW — these feed back into an updated RAW (version 1.1) for future consideration.
 
 ```mermaid
 flowchart LR
@@ -340,13 +375,15 @@ flowchart LR
     style RAW2 fill:#FFF3E0,stroke:#E65100,color:#000
 ```
 
-> **SLA BB** (Service Level Agreement Building Block) is defined during RAW → SAW scoping.
+> **SLA BB** (Service Level Agreement Building Block) is formally defined during RAW → SAW scoping, establishing the performance and service expectations for each architectural component.
 
 ---
 
 ## 8. Change Requests Driving ADM Cycles
 
-New ADM cycles can be triggered by **eight sources**:
+The ADM is not triggered once and then left to run on autopilot. In practice, new architecture work is continuously initiated by **change requests** from a wide variety of sources. Understanding where these requests come from helps the EA team anticipate demand, prioritise work, and ensure that architectural governance is applied consistently.
+
+Some triggers are top-down (a new strategy from the board), others are bottom-up (a developer discovers a better way to structure a system), and others come from outside the organisation altogether (a new regulation, a market disruption, or a technology shift). All eight trigger types ultimately feed into the same ADM process.
 
 ```mermaid
 flowchart TD
@@ -376,6 +413,10 @@ flowchart TD
 
 ## 9. Phase E vs. Phase F Objectives
 
+Phases E and F are often misunderstood as being the same thing because they both deal with "getting to implementation." In reality, they serve very different purposes and must be kept distinct.
+
+**Phase E (Opportunities & Solutions)** is an analytical phase — its job is to survey the landscape of possible solutions, check whether candidate building blocks are interoperable, and select the best options. It is the "what could we build?" phase. **Phase F (Migration Planning)** is a planning phase — it takes the decisions made in Phase E and turns them into a concrete, time-sequenced roadmap. It is the "how do we actually get there, and in what order?" phase. Skipping straight to Phase F without Phase E risks committing to a plan that is built on incompatible or poorly evaluated components.
+
 ```mermaid
 flowchart LR
     subgraph E ["Phase E — Opportunities & Solutions"]
@@ -398,7 +439,7 @@ flowchart LR
     E --> F
 ```
 
-Phase E uses the **SBB Compatibility Stack** to assess solutions:
+Phase E evaluates solutions against the **SBB Compatibility Stack** — preferring generic, reusable components before committing to organisation-specific custom builds:
 
 ```
 Foundation  →  Common  →  System  →  Industry  →  Organisation-Specific
@@ -408,7 +449,9 @@ Foundation  →  Common  →  System  →  Industry  →  Organisation-Specific
 
 ## 10. Transition Architecture Planning
 
-Transition Architectures (T1, T2, T3…) are **intermediate target states** between baseline and full target.
+Transforming a large enterprise from its current state (the Baseline Architecture) to a desired future state (the Target Architecture) is rarely achievable in a single leap. The gap is typically too large, too risky, and too complex to cross all at once. **Transition Architectures** solve this problem by defining a series of intermediate waypoints — T1, T2, T3 — each of which is a coherent, deployable architecture in its own right.
+
+Each transition delivers a complete slice across all four BDAT domains simultaneously. This is important: you cannot move the Technology Architecture forward while leaving the Business Architecture behind, because they are interdependent. The Gantt chart below illustrates how all four domains move in lockstep through each transition.
 
 ```mermaid
 gantt
@@ -443,6 +486,8 @@ gantt
 
 ### Build Patterns
 
+The architecture team can choose from different delivery patterns depending on the nature of the work. **Greenfield** builds start from nothing — highest risk and cost, but maximum freedom. **Quick Win** increments target early, visible value to build stakeholder confidence. **Reuse/Repeat** patterns (like the Barracuda Class example from the source material) are the most efficient: a design is created once and then deployed multiple times with minor variations.
+
 | Pattern | Description | Example |
 |---|---|---|
 | **Greenfield** | New build from scratch | New platform deployment |
@@ -453,6 +498,10 @@ gantt
 ---
 
 ## 11. Agile EA vs. Traditional EA
+
+A common misconception is that TOGAF is inherently slow and bureaucratic — better suited to traditional waterfall projects than to fast-moving digital organisations. This is a misreading. TOGAF explicitly supports both predictive (traditional) and agile delivery styles, and provides a model for choosing the right approach based on the nature of the project.
+
+The decision matrix below uses two axes: **how frequently** the organisation needs to deliver changes, and **how much the architecture changes** with each delivery. Projects in the bottom-left (infrequent, low-change) are best managed predictively. Projects in the top-right (frequent, high-change) suit agile methods. The skill of an Enterprise Architect is recognising which quadrant a given initiative sits in — and tailoring the ADM engagement accordingly.
 
 ```mermaid
 quadrantChart
@@ -479,7 +528,9 @@ quadrantChart
 
 ## 12. Enterprise Security Architecture
 
-Security is a **parallel track** woven throughout the entire ADM — not a separate phase.
+Security is often treated as an afterthought in architecture — bolted on at the end when the design is already finalised. TOGAF takes a different view: **security is a parallel, continuous concern** that must be considered at every phase of the ADM, not just during implementation.
+
+The Security Architecture track runs alongside the main ADM phases. At each phase, the security architect is asking: "What are the security implications of this design decision? What risks are we introducing? What controls are needed?" The outputs — a Risks Catalogue, a live Risks Register, and compliance assessments — are maintained and updated throughout the entire cycle. This ensures that by the time the architecture reaches implementation, security has been designed in, not patched on.
 
 ```mermaid
 flowchart LR
@@ -510,6 +561,10 @@ flowchart LR
 ---
 
 ## 13. Repository & Enterprise Continuum
+
+The **Architecture Repository** is the institutional memory of the EA function. It stores every architecture artefact produced across all ADM cycles — requirements, risks, designs, and reusable building blocks — making them available for future work. Without a well-maintained repository, organisations reinvent the wheel with every new project and lose the accumulated value of past architectural decisions.
+
+The **Enterprise Continuum** is the classification system within the repository for building blocks. It organises blocks on a spectrum from the most generic (Foundation Architecture — applicable to any organisation) to the most specific (Organisation-Specific Architecture — custom to your enterprise). When starting new architecture work, architects first search the Continuum for reusable blocks before creating new ones.
 
 ```mermaid
 flowchart TD
@@ -556,7 +611,9 @@ flowchart TD
 
 ## 14. Business Scenarios
 
-A **Business Scenario** is used in Phase A (and referenced throughout) to translate stakeholder concerns into architecture requirements.
+One of the most common failure modes in architecture is designing a solution to the wrong problem. This happens when architects work in isolation, translating a brief into technical designs without sufficiently understanding the business context. **Business Scenarios** are TOGAF's mechanism for preventing this.
+
+A Business Scenario is a structured conversation between the Architecture Team and business stakeholders. Its purpose is to uncover the real drivers, constraints, and needs behind a request — before any design decisions are made. It produces requirements across all five architecture domains (Business, Data, Application, Technology, and Security), ensuring nothing is overlooked. These requirements then flow directly into the Architecture Requirement Specifications (A.R.S.) that govern the rest of the ADM cycle.
 
 ```mermaid
 flowchart LR
@@ -590,7 +647,9 @@ flowchart LR
 
 ## 15. TOGAF® EA Viewpoints Library (10th Edition)
 
-The 10th Edition significantly expanded the viewpoints library across five architecture domains.
+Architecture is complex — no single diagram can communicate everything to every stakeholder. A CEO needs a value stream map; a DBA needs a data entity diagram; a network engineer needs a platform decomposition diagram. The **Viewpoints Library** is TOGAF's answer to this challenge: a structured catalogue of standardised views, each designed to communicate a specific aspect of the architecture to a specific audience.
+
+The 10th Edition significantly expanded the library, particularly in the Business Architecture domain, adding new viewpoints for Business Models, Business Capability Maps, and Value Stream Maps. Each domain (Preliminary, Business, Data, Application, Technology) provides three types of views: **Catalogs** (inventories), **Matrices** (cross-domain relationships), and **Diagrams** (visual representations).
 
 ```mermaid
 flowchart TD
@@ -637,15 +696,17 @@ flowchart TD
 
 | Type | Purpose | Examples |
 |---|---|---|
-| **Catalogs** | Inventories of architecture elements | Org/Actor Catalog, Technology Portfolio |
-| **Matrices** | Cross-domain relationships | Application/Technology Matrix |
-| **Diagrams** | Visual representations of architecture | Process Flow, Platform Decomposition |
+| **Catalogs** | Complete inventories of architecture elements | Org/Actor Catalog, Technology Portfolio |
+| **Matrices** | Map cross-domain relationships and dependencies | Application/Technology Matrix |
+| **Diagrams** | Visual representations for specific audiences | Process Flow, Platform Decomposition |
 
 ---
 
 ## 16. Foundation Metamodel
 
-The **TOGAF Enterprise Metamodel** defines relationships between all architectural entities.
+The **Metamodel** is TOGAF's formal vocabulary — a precise definition of every type of architectural entity and how they relate to each other. It answers the question: "When we talk about a Business Capability, a Process, or a Technology Service, what exactly do we mean, and how do these concepts connect?"
+
+Without a shared metamodel, architecture teams in different parts of the organisation use the same words to mean different things, making it impossible to integrate work across teams or compare architectures. The metamodel enforces consistency. It defines **General Entities** (like Principles, Requirements, and Gaps) that apply everywhere, and **domain-specific entities** for each of the four architecture domains. The most critical cross-domain relationship is the chain from Business Service → Application Service → Technology Service, which traces how business needs are ultimately supported by technology.
 
 ### General Entities (cross-domain)
 
@@ -719,6 +780,10 @@ flowchart LR
 
 ## 17. Content Framework by ADM Phase
 
+The Content Framework maps the types of architecture work — and the level of detail expected — to each ADM phase. It answers a practical question that every architect faces: "At this stage of the project, what should my architecture documents actually contain?"
+
+Early phases (A) produce high-level, contextual and conceptual artefacts — visions and scenarios, not detailed designs. The middle phases (B, C, D) produce logical designs — detailed enough to guide decisions, but still technology-agnostic. Phases E and F move into physical design, where specific products and vendors are selected. Finally, Phases G and H shift the focus away from design entirely, towards governance, compliance, and change management.
+
 ```mermaid
 flowchart LR
     subgraph CONTEXT ["Contextual & Conceptual"]
@@ -777,7 +842,9 @@ flowchart LR
 
 ## 18. Classes of Architecture Engagement
 
-TOGAF recognises different **classes of architecture change engagement**, determined by three questions:
+Not all architecture work is the same, and applying a full enterprise architecture process to every change — regardless of scale — would be wasteful and impractical. TOGAF's **Classes of Architecture Engagement** provide a framework for calibrating the level of EA involvement to the nature of the change.
+
+The class is determined by three questions: *Why* is the change occurring (what is the driver)? *When and how often* does it need to happen (frequency and urgency)? *What* is the scope and nature of the change (architectural impact)? The answers to these questions determine which ADM phases to emphasise, how formal the governance process should be, and whether the engagement is best handled by a full EA team or a lighter-touch advisory function.
 
 ```mermaid
 flowchart TD
@@ -804,6 +871,6 @@ flowchart TD
     style CLASS fill:#1A4A8A,stroke:#1A4A8A,color:#fff
 ```
 
-The engagement class determines how the ADM is applied — from lightweight advisory work through to full enterprise re-architecture.
+The engagement class determines how the ADM is applied — from lightweight advisory work on a small initiative through to a full enterprise re-architecture programme spanning multiple years.
 
 ---
