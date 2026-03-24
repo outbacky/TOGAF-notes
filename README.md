@@ -1,4 +1,26 @@
-# TOGAF® EA Notes
+## Table of Contents
+
+| # | Section |
+|---|---|
+| 1 | [What is TOGAF?](#1-what-is-togaf) |
+| 2 | [The Architecture Development Method (ADM)](#2-the-architecture-development-method-adm) |
+| 3 | [Architecture Scoping](#3-architecture-scoping) |
+| 4 | [Architecture Abstraction Levels](#4-architecture-abstraction-levels) |
+| 5 | [Architecture Building Blocks (ABBs & SBBs)](#5-architecture-building-blocks-abbs--sbbs) |
+| 6 | [Key Deliverables & Artefacts](#6-key-deliverables--artefacts) |
+| 7 | [RAW vs. SAW](#7-raw-vs-saw) |
+| 8 | [Change Requests Driving ADM Cycles](#8-change-requests-driving-adm-cycles) |
+| 9 | [Phase E vs. Phase F Objectives](#9-phase-e-vs-phase-f-objectives) |
+| 10 | [Transition Architecture Planning](#10-transition-architecture-planning) |
+| 11 | [Agile EA vs. Traditional EA](#11-agile-ea-vs-traditional-ea) |
+| 12 | [Enterprise Security Architecture](#12-enterprise-security-architecture) |
+| 13 | [Repository & Enterprise Continuum](#13-repository--enterprise-continuum) |
+| 14 | [Business Scenarios](#14-business-scenarios) |
+| 15 | [TOGAF® EA Viewpoints Library (10th Edition)](#15-togaf-ea-viewpoints-library-10th-edition) |
+| 16 | [Foundation Metamodel](#16-foundation-metamodel) |
+| 17 | [Content Framework by ADM Phase](#17-content-framework-by-adm-phase) |
+| 18 | [Classes of Architecture Engagement](#18-classes-of-architecture-engagement) |
+
 ---
 
 ## 1. What is TOGAF?
@@ -344,3 +366,5 @@ TOGAF recognises different **classes of architecture change engagement** based o
 - **What** the scope and nature of the change is
 
 These classes help determine which ADM phases to emphasise and how to tailor the engagement model for the organisation's context.
+
+---
