@@ -1,7 +1,6 @@
 # TOGAF® EA — Visual Study Notes
 
 ![TOGAF](https://img.shields.io/badge/TOGAF®-10th%20Edition-E05D26?style=flat-square) ![Standard](https://img.shields.io/badge/Standard-The%20Open%20Group-1A4A8A?style=flat-square)
-
 > Based on the **TOGAF® Standard, 10th Edition** 
 
 ---
@@ -69,132 +68,25 @@ The cycle begins with the **Preliminary phase** (setting up the EA capability), 
 
 The key insight of the ADM is that architecture is never "done." Every significant change — a new business strategy, a technology shift, a merger — triggers a new pass through the cycle, starting at whichever phase is appropriate for the scale of the change.
 
-### ADM Phase Wheel
+### ADM Phase Flow
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 620" width="600" height="620" role="img" aria-label="TOGAF ADM Phase Wheel">
+```mermaid
+flowchart TB
+    RM(["Requirements\nManagement\nCentral Hub"])
 
-  <!-- Background -->
-  <rect width="600" height="620" fill="#0d0d0d" rx="12"/>
+    P["P · Preliminary\n'Setting up the Shop'\nCapability Framework\nPrinciples & Governance"]
+    A["A · Architecture Vision\nScope & Stakeholders\nBusiness Scenarios\nHigh-level Vision"]
+    B["B · Business Architecture\nProcesses & Capabilities\nValue Streams"]
+    C["C · Information Systems\nData Architecture\nApplication Architecture"]
+    D["D · Technology Architecture\nTechnology Components\nPlatforms"]
+    E["E · Opportunities & Solutions\nCandidate SBBs\nRoadmap Options"]
+    F["F · Migration Planning\nTransition Architectures\nImplementation & Migration Plan"]
+    G["G · Implementation Governance\nOversight of Delivery\nCompliance"]
+    H["H · Architecture Change Mgmt\nMonitor Change\nManage Re-iteration"]
 
-  <!-- Spokes from centre to each phase node -->
-  <!-- Centre is at 300,320. Phases at radius 200 -->
-  <!-- Preliminary at top: 300,80 (above centre, connected by straight line) -->
-  <line x1="300" y1="320" x2="300" y2="138" stroke="#555" stroke-width="1.5"/>
-
-  <!-- A: top  angle=-90+0*(360/8) = top = 300,120 -->
-  <!-- phases A-H evenly at radius 200, starting top and going clockwise -->
-  <!-- A at -72deg, B at -36, C at 0, D at 36, E at 72, F at 108(=180-72), G at 144, H at 180+(-72)=108... -->
-  <!-- Let's use exact coords: centre 300,320, r=200 -->
-  <!-- A: 270deg (top)    = 300+200*cos(270°), 320+200*sin(270°) = 300, 120  -->
-  <!-- B: 315deg          = 300+200*cos(315°), 320+200*sin(315°) = 441, 179  -->
-  <!-- C: 0deg            = 500, 320 -->
-  <!-- D: 45deg           = 441, 461 -->
-  <!-- E: 90deg           = 300, 520 -->
-  <!-- F: 135deg          = 159, 461 -->
-  <!-- G: 180deg          = 100, 320 -->
-  <!-- H: 225deg          = 159, 179 -->
-
-  <line x1="300" y1="320" x2="300" y2="120" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="441" y2="179" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="500" y2="320" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="441" y2="461" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="300" y2="520" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="159" y2="461" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="100" y2="320" stroke="#555" stroke-width="1.5"/>
-  <line x1="300" y1="320" x2="159" y2="179" stroke="#555" stroke-width="1.5"/>
-
-  <!-- Outer ring circle (guide) -->
-  <circle cx="300" cy="320" r="200" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4,4"/>
-
-  <!-- Preliminary node at top, outside ring -->
-  <line x1="300" y1="120" x2="300" y2="68" stroke="#555" stroke-width="1.5"/>
-  <circle cx="300" cy="48" r="38" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="300" y="43" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#1a1a1a">Prelim-</text>
-  <text x="300" y="56" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#1a1a1a">inary</text>
-
-  <!-- Centre: Requirements Management -->
-  <circle cx="300" cy="320" r="70" fill="#E08000" stroke="#A05000" stroke-width="3"/>
-  <text x="300" y="308" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#1a1a1a">Requirements</text>
-  <text x="300" y="323" text-anchor="middle" font-family="Georgia, serif" font-size="12" font-weight="bold" fill="#1a1a1a">Management</text>
-
-  <!-- Phase nodes at r=200 -->
-
-  <!-- A: 270° = top = (300, 120) -->
-  <circle cx="300" cy="120" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="300" y="111" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">A.</text>
-  <text x="300" y="125" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Architecture</text>
-  <text x="300" y="138" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Vision</text>
-
-  <!-- B: 315° = (441, 179) -->
-  <circle cx="441" cy="179" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="441" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">B.</text>
-  <text x="441" y="184" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Business</text>
-  <text x="441" y="197" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Architecture</text>
-
-  <!-- C: 0° = (500, 320) -->
-  <circle cx="500" cy="320" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="500" y="308" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">C.</text>
-  <text x="500" y="321" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Information</text>
-  <text x="500" y="333" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Systems Arch.</text>
-
-  <!-- D: 45° = (441, 461) -->
-  <circle cx="441" cy="461" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="441" y="452" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">D.</text>
-  <text x="441" y="466" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Technology</text>
-  <text x="441" y="479" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Architecture</text>
-
-  <!-- E: 90° = (300, 520) -->
-  <circle cx="300" cy="520" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="300" y="508" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">E.</text>
-  <text x="300" y="521" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Opportunities</text>
-  <text x="300" y="533" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">&amp; Solutions</text>
-
-  <!-- F: 135° = (159, 461) -->
-  <circle cx="159" cy="461" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="159" y="452" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">F.</text>
-  <text x="159" y="466" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Migration</text>
-  <text x="159" y="479" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" fill="#1a1a1a">Planning</text>
-
-  <!-- G: 180° = (100, 320) -->
-  <circle cx="100" cy="320" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="100" y="308" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">G.</text>
-  <text x="100" y="321" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Implementation</text>
-  <text x="100" y="333" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Governance</text>
-
-  <!-- H: 225° = (159, 179) -->
-  <circle cx="159" cy="179" r="48" fill="#F5A800" stroke="#C47D00" stroke-width="2.5"/>
-  <text x="159" y="167" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#1a1a1a">H.</text>
-  <text x="159" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Architecture</text>
-  <text x="159" y="192" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#1a1a1a">Change Mgmt</text>
-
-  <!-- Clockwise flow arrows on the ring (arrowhead markers) -->
-  <defs>
-    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#F5A800"/>
-    </marker>
-  </defs>
-
-  <!-- Arc arrows between phases (small arcs just outside r=200, pointing clockwise) -->
-  <!-- A→B: from ~280° to ~310° on r=215 -->
-  <path d="M 313,122 A 215,215 0 0,1 430,142" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- B→C -->
-  <path d="M 474,210 A 215,215 0 0,1 497,300" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- C→D -->
-  <path d="M 497,340 A 215,215 0 0,1 474,430" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- D→E -->
-  <path d="M 430,498 A 215,215 0 0,1 330,525" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- E→F -->
-  <path d="M 270,525 A 215,215 0 0,1 170,498" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- F→G -->
-  <path d="M 126,430 A 215,215 0 0,1 103,340" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- G→H -->
-  <path d="M 103,300 A 215,215 0 0,1 126,210" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-  <!-- H→A -->
-  <path d="M 170,142 A 215,215 0 0,1 287,122" fill="none" stroke="#F5A800" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- Copyright -->
-  <text x="300" y="610" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#555">© The Open Group — TOGAF® Standard, 10th Edition</text>
-</svg>
+    P --> A --> B --> C --> D --> E --> F --> G --> H --> A
+    RM <--> A & B & C & D & E & F & G & H
+```
 
 ### ADM Iteration Types
 
