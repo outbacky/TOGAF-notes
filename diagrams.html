@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOGAF® EA — Visual Diagrams Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #0e1624;
+    --navy2:   #16213a;
+    --navy3:   #1e2d4a;
+    --amber:   #f5a800;
+    --amber2:  #e08000;
+    --amber3:  #ffd166;
+    --cream:   #f0ead8;
+    --text:    #d4cbbf;
+    --text2:   #8a9bb5;
+    --white:   #ffffff;
+    --red:     #c0392b;
+    --green:   #2e7d32;
+    --blue:    #1565c0;
+    --purple:  #6a1b9a;
+    --pink:    #880e4f;
+    --divider: rgba(245,168,0,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy2);
+    border-bottom: 2px solid var(--amber);
+    padding: 60px 40px 48px;
+    text-align: center;
+  }
+  header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--amber); }
+  header p {
+    color: var(--text2);
+    font-size: 14px;
+    font-style: italic;
+  }
+  .badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .badge {
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+  }
+  .badge-amber { background: var(--amber); color: var(--navy); }
+  .badge-navy  { background: var(--navy3); color: var(--amber); border: 1px solid var(--amber); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy2);
+    border-bottom: 1px solid var(--divider);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav .container {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0;
+  }
+  nav a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  nav a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--divider);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    margin-bottom: 10px;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--amber);
+    letter-spacing: 2px;
+    min-width: 28px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .subtitle {
+    color: var(--text2);
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 24px;
+    margin-left: 46px;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--amber3);
+    margin: 36px 0 14px;
+    font-weight: 600;
+  }
+  p {
+    color: var(--text);
+    margin-bottom: 16px;
+    max-width: 720px;
+  }
+  strong { color: var(--white); font-weight: 600; }
+  em { color: var(--amber3); font-style: italic; }
+
+  /* ── DIAGRAM WRAPPER ── */
+  .diagram {
+    background: var(--navy2);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 32px 24px;
+    margin: 28px 0;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .diagram svg { max-width: 100%; height: auto; }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th {
+    background: var(--navy3);
+    color: var(--amber);
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--amber2);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--divider);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--amber);
+    background: rgba(245,168,0,0.06);
+    padding: 14px 18px;
+    margin: 18px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    color: var(--text2);
+  }
+  .callout strong { color: var(--amber3); }
+
+  /* ── CODE ── */
+  .stack-label {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 14px 0;
+  }
+  .stack-item {
+    background: var(--navy3);
+    border: 1px solid var(--divider);
+    color: var(--text);
+    padding: 7px 14px;
+    font-size: 13px;
+    font-family: 'Source Serif 4', serif;
+  }
+  .stack-arrow {
+    color: var(--amber);
+    padding: 0 6px;
+    font-size: 16px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy2);
+    border-top: 1px solid var(--divider);
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--text2);
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  /* ── SVG shared styles ── */
+  .svg-node { font-family: 'Source Serif 4', Georgia, serif; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Visual Reference Guide</div>
+  <h1>TOGAF<span>®</span> EA — Diagrams</h1>
+  <p>Based on the TOGAF® Standard, 10th Edition · ALC Training / WBISCT Diagrams v3.0 (2025)</p>
+  <div class="badges">
+    <span class="badge badge-amber">10th Edition</span>
+    <span class="badge badge-navy">The Open Group</span>
+    <span class="badge badge-navy">18 Diagrams</span>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a href="#s1">1. TOGAF</a>
+    <a href="#s2">2. ADM</a>
+    <a href="#s3">3. Scoping</a>
+    <a href="#s4">4. Abstraction</a>
+    <a href="#s5">5. Building Blocks</a>
+    <a href="#s6">6. Deliverables</a>
+    <a href="#s7">7. RAW vs SAW</a>
+    <a href="#s8">8. Change Triggers</a>
+    <a href="#s9">9. Phase E vs F</a>
+    <a href="#s10">10. Transition</a>
+    <a href="#s11">11. Agile EA</a>
+    <a href="#s12">12. Security</a>
+    <a href="#s13">13. Repository</a>
+    <a href="#s14">14. Scenarios</a>
+    <a href="#s15">15. Viewpoints</a>
+    <a href="#s16">16. Metamodel</a>
+    <a href="#s17">17. Content</a>
+    <a href="#s18">18. Engagement</a>
+  </div>
+</nav>
+
+<main class="container">
+
+<!-- ═══════════════════════════════════════════════ 1 -->
+<section id="s1">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2>What is TOGAF?</h2>
+  </div>
+  <p class="subtitle">Framework overview &amp; four domains</p>
+  <p>TOGAF (The Open Group Architecture Framework) is a globally recognised framework for practising Enterprise Architecture — a structured, repeatable approach to designing and governing an organisation's business and technology landscape.</p>
+  <p>At its core, TOGAF organises an enterprise into <strong>four architecture domains</strong> (BDAT) and provides a methodology, vocabulary, and set of best practices that can be adapted to any organisation.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 340" width="700" height="340" xmlns="http://www.w3.org/2000/svg">
+      <!-- TOGAF core box -->
+      <rect x="250" y="120" width="200" height="100" rx="8" fill="#1e2d4a" stroke="#f5a800" stroke-width="2"/>
+      <text x="350" y="158" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" font-weight="700" fill="#f5a800">TOGAF®</text>
+      <text x="350" y="178" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">The Open Group</text>
+      <text x="350" y="196" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">10th Edition</text>
+
+      <!-- Four domain bubbles -->
+      <!-- Business -->
+      <rect x="20" y="10" width="150" height="60" rx="6" fill="#1e3a2a" stroke="#2e7d32" stroke-width="1.5"/>
+      <text x="95" y="36" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="600" fill="#66bb6a">Business</text>
+      <text x="95" y="54" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Processes · Capabilities</text>
+      <!-- Data -->
+      <rect x="530" y="10" width="150" height="60" rx="6" fill="#1a2a4a" stroke="#1565c0" stroke-width="1.5"/>
+      <text x="605" y="36" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="600" fill="#42a5f5">Data</text>
+      <text x="605" y="54" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Entities · Flows · Models</text>
+      <!-- Application -->
+      <rect x="20" y="270" width="150" height="60" rx="6" fill="#2a1a3a" stroke="#6a1b9a" stroke-width="1.5"/>
+      <text x="95" y="296" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="600" fill="#ba68c8">Application</text>
+      <text x="95" y="314" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Systems · Services · APIs</text>
+      <!-- Technology -->
+      <rect x="530" y="270" width="150" height="60" rx="6" fill="#3a1a1a" stroke="#c62828" stroke-width="1.5"/>
+      <text x="605" y="296" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="600" fill="#ef5350">Technology</text>
+      <text x="605" y="314" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Platforms · Infrastructure</text>
+
+      <!-- Connector lines -->
+      <line x1="170" y1="40" x2="250" y2="145" stroke="#2e7d32" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="530" y1="40" x2="450" y2="145" stroke="#1565c0" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="170" y1="300" x2="250" y2="195" stroke="#6a1b9a" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="530" y1="300" x2="450" y2="195" stroke="#c62828" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
+
+      <!-- Core components row -->
+      <text x="350" y="270" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">Core Components:</text>
+      <text x="350" y="290" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">ADM · Repository · Continuum · Viewpoints · Metamodel</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 2 -->
+<section id="s2">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2>The Architecture Development Method</h2>
+  </div>
+  <p class="subtitle">ADM Phase Wheel — the core iterative cycle</p>
+  <p>The ADM is a structured, iterative cycle of phases. Rather than a one-time project, it is designed to repeat continuously as the organisation evolves. <strong>Requirements Management</strong> sits at the centre — not a phase itself, but a continuous process connecting every phase.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 580 580" width="580" height="580" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr-cw" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+
+      <!-- Dashed guide ring -->
+      <circle cx="290" cy="300" r="195" fill="none" stroke="rgba(245,168,0,0.12)" stroke-width="1" stroke-dasharray="5,5"/>
+
+      <!-- Spoke lines centre→node -->
+      <line x1="290" y1="300" x2="290" y2="110"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="428" y2="162"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="482" y2="300"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="428" y2="438"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="290" y2="490"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="152" y2="438"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="98"  y2="300"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <line x1="290" y1="300" x2="152" y2="162"  stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+
+      <!-- Clockwise arc arrows between phases -->
+      <path d="M302,112 A200,200 0 0,1 415,147" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M453,175" fill="none"/>
+      <path d="M461,178 A200,200 0 0,1 482,285" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M482,316 A200,200 0 0,1 461,422" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M432,453 A200,200 0 0,1 318,487" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M262,487 A200,200 0 0,1 148,453" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M119,422 A200,200 0 0,1 98,316" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M98,285 A200,200 0 0,1 119,178" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+      <path d="M148,147 A200,200 0 0,1 278,112" fill="none" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr-cw)"/>
+
+      <!-- Preliminary (top, outside ring) -->
+      <line x1="290" y1="110" x2="290" y2="62" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <circle cx="290" cy="42" r="34" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="290" y="37" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#0e1624">Prelim-</text>
+      <text x="290" y="51" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#0e1624">inary</text>
+
+      <!-- Centre: Requirements Management -->
+      <circle cx="290" cy="300" r="68" fill="#e08000" stroke="#a05000" stroke-width="2.5"/>
+      <text x="290" y="292" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">Requirements</text>
+      <text x="290" y="308" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">Management</text>
+
+      <!-- A — top (290, 110) -->
+      <circle cx="290" cy="110" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="290" y="103" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">A.</text>
+      <text x="290" y="117" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Architecture</text>
+      <text x="290" y="129" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Vision</text>
+
+      <!-- B — upper-right (428, 162) -->
+      <circle cx="428" cy="162" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="428" y="155" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">B.</text>
+      <text x="428" y="169" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Business</text>
+      <text x="428" y="181" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Architecture</text>
+
+      <!-- C — right (482, 300) -->
+      <circle cx="482" cy="300" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="482" y="291" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">C.</text>
+      <text x="482" y="305" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Information</text>
+      <text x="482" y="317" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Systems Arch.</text>
+
+      <!-- D — lower-right (428, 438) -->
+      <circle cx="428" cy="438" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="428" y="431" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">D.</text>
+      <text x="428" y="445" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Technology</text>
+      <text x="428" y="457" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Architecture</text>
+
+      <!-- E — bottom (290, 490) -->
+      <circle cx="290" cy="490" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="290" y="481" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">E.</text>
+      <text x="290" y="495" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Opportunities</text>
+      <text x="290" y="507" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">&amp; Solutions</text>
+
+      <!-- F — lower-left (152, 438) -->
+      <circle cx="152" cy="438" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="152" y="431" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">F.</text>
+      <text x="152" y="445" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Migration</text>
+      <text x="152" y="457" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#0e1624">Planning</text>
+
+      <!-- G — left (98, 300) -->
+      <circle cx="98" cy="300" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="98" y="291" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">G.</text>
+      <text x="98" y="305" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Implementation</text>
+      <text x="98" y="317" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Governance</text>
+
+      <!-- H — upper-left (152, 162) -->
+      <circle cx="152" cy="162" r="46" fill="#f5a800" stroke="#c47d00" stroke-width="2"/>
+      <text x="152" y="153" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">H.</text>
+      <text x="152" y="167" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Architecture</text>
+      <text x="152" y="179" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#0e1624">Change Mgmt</text>
+    </svg>
+  </div>
+
+  <h3>ADM Iteration Types</h3>
+  <p>Not every change requires running all phases from scratch. Architects re-enter the cycle at whichever iteration level fits the scale of the change.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 130" width="700" height="130" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Four iteration bands -->
+      <!-- Cap -->
+      <rect x="10" y="15" width="120" height="100" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="70" y="40" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Capability</text>
+      <text x="70" y="54" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Iteration</text>
+      <text x="70" y="75" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#f5a800" font-weight="700">P</text>
+      <!-- Dev -->
+      <rect x="175" y="15" width="190" height="100" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="270" y="40" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Development</text>
+      <text x="270" y="54" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Iteration</text>
+      <text x="270" y="75" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#f5a800" font-weight="700">A → B → C → D</text>
+      <!-- Trans -->
+      <rect x="410" y="15" width="130" height="100" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="475" y="40" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Transition</text>
+      <text x="475" y="54" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Iteration</text>
+      <text x="475" y="75" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#f5a800" font-weight="700">E → F</text>
+      <!-- Gov -->
+      <rect x="585" y="15" width="110" height="100" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="640" y="40" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Governance</text>
+      <text x="640" y="54" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Iteration</text>
+      <text x="640" y="75" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#f5a800" font-weight="700">G → H</text>
+      <!-- Arrows -->
+      <line x1="130" y1="65" x2="173" y2="65" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <line x1="365" y1="65" x2="408" y2="65" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <line x1="540" y1="65" x2="583" y2="65" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <!-- Re-iterate back arrow -->
+      <path d="M640,115 Q640,126 290,126 Q175,126 175,115" fill="none" stroke="#f5a800" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="175" y1="116" x2="175" y2="115" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr2)"/>
+      <text x="407" y="122" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#8a9bb5">re-iterate</text>
+    </svg>
+  </div>
+
+  <h3>Change Classification</h3>
+  <table>
+    <thead><tr><th>Change Type</th><th>Description</th><th>ADM Impact</th></tr></thead>
+    <tbody>
+      <tr><td><strong>RE-Architecture</strong></td><td>Major structural change</td><td>Back to Phase A or Preliminary</td></tr>
+      <tr><td><strong>Large Incremental</strong></td><td>More than one phase rework</td><td>Multi-phase reiteration</td></tr>
+      <tr><td><strong>Simplification</strong></td><td>Small incremental change</td><td>Rework within a single phase</td></tr>
+      <tr><td><strong>General Change Mgmt</strong></td><td>Ongoing governance activities</td><td>Phases G &amp; H</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 3 -->
+<section id="s3">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2>Architecture Scoping</h2>
+  </div>
+  <p class="subtitle">Breadth, depth, level &amp; the four EA engagement contexts</p>
+  <p>Before any architecture work begins, the team must define scope across <strong>three dimensions</strong>: how wide (Breadth), how detailed (Depth), and at what organisational layer (Level). The DPBoK engagement contexts then describe the <em>purpose</em> of the engagement.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 200" width="700" height="200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Three dimension boxes -->
+      <rect x="20"  y="20" width="200" height="160" rx="8" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1.5"/>
+      <rect x="250" y="20" width="200" height="160" rx="8" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1.5"/>
+      <rect x="480" y="20" width="200" height="160" rx="8" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1.5"/>
+
+      <text x="120" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="700" fill="#f5a800">BREADTH</text>
+      <line x1="50" y1="62" x2="190" y2="62" stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <text x="120" y="85"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Enterprise-wide</text>
+      <text x="120" y="107" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Segment</text>
+      <text x="120" y="129" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Capability-specific</text>
+
+      <text x="350" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="700" fill="#f5a800">DEPTH</text>
+      <line x1="280" y1="62" x2="420" y2="62" stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <text x="350" y="85"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Contextual</text>
+      <text x="350" y="107" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Conceptual</text>
+      <text x="350" y="129" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Logical</text>
+      <text x="350" y="151" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Physical / Technical</text>
+
+      <text x="580" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="700" fill="#f5a800">LEVEL</text>
+      <line x1="510" y1="62" x2="650" y2="62" stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <text x="580" y="85"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Organisational layer</text>
+      <text x="580" y="107" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Architectural layer</text>
+      <text x="580" y="129" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="12" fill="#d4cbbf">Initiative level</text>
+    </svg>
+  </div>
+
+  <h3>Four EA Engagement Contexts (DPBoK)</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 680 220" width="680" height="220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr3" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Context boxes stacked -->
+      <rect x="20"  y="10"  width="640" height="42" rx="6" fill="#1a1220" stroke="#880e4f" stroke-width="1.5"/>
+      <rect x="20"  y="64"  width="490" height="42" rx="6" fill="#1a2010" stroke="#2e7d32" stroke-width="1.5"/>
+      <rect x="20"  y="118" width="340" height="42" rx="6" fill="#101820" stroke="#1565c0" stroke-width="1.5"/>
+      <rect x="20"  y="172" width="190" height="42" rx="6" fill="#1a1020" stroke="#6a1b9a" stroke-width="1.5"/>
+
+      <!-- Labels -->
+      <text x="36" y="30" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#f06292">IV — Enduring Enterprise</text>
+      <text x="36" y="46" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">EA to support Strategy</text>
+
+      <text x="36" y="84" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#66bb6a">III — Team of Teams</text>
+      <text x="36" y="100" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">EA to support Portfolio Management</text>
+
+      <text x="36" y="138" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#42a5f5">II — Segment Vision</text>
+      <text x="36" y="154" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">EA to support Project Delivery</text>
+
+      <text x="36" y="192" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#ba68c8">I — Capability Vision</text>
+      <text x="36" y="208" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">EA to support Solution Delivery</text>
+
+      <!-- Up arrow -->
+      <line x1="660" y1="210" x2="660" y2="18" stroke="#f5a800" stroke-width="2" marker-end="url(#arr3)"/>
+      <text x="672" y="120" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5" transform="rotate(90,672,120)">Strategic Scope</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 4 -->
+<section id="s4">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2>Architecture Abstraction Levels</h2>
+  </div>
+  <p class="subtitle">Contextual → Conceptual → Logical → Physical</p>
+  <p>Different stakeholders need different levels of detail. TOGAF defines four abstraction levels — a progression from the most abstract (big picture) to the most concrete (implementation-ready). Each level builds on the one above it.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 280" width="680" height="280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Four horizontal bands -->
+      <rect x="20" y="10"  width="640" height="55" rx="6" fill="#2a1a0a" stroke="#e65100" stroke-width="1.5"/>
+      <rect x="20" y="78"  width="640" height="55" rx="6" fill="#0a2a0a" stroke="#2e7d32" stroke-width="1.5"/>
+      <rect x="20" y="146" width="640" height="55" rx="6" fill="#0a1a2a" stroke="#1565c0" stroke-width="1.5"/>
+      <rect x="20" y="214" width="640" height="55" rx="6" fill="#1a0a2a" stroke="#6a1b9a" stroke-width="1.5"/>
+
+      <!-- Labels and descriptions -->
+      <text x="38" y="34" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#ff8f00">CONTEXTUAL</text>
+      <text x="200" y="34" font-family="'Source Serif 4',serif" font-size="12" fill="#8a9bb5">Why are we doing this?</text>
+      <text x="38" y="53" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Environment, goals, drivers, objectives — scope of architecture work</text>
+
+      <text x="38" y="101" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#66bb6a">CONCEPTUAL</text>
+      <text x="200" y="101" font-family="'Source Serif 4',serif" font-size="12" fill="#8a9bb5">What is needed?</text>
+      <text x="38" y="120" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Service models — business, application, technology services — requirement decomposition</text>
+
+      <text x="38" y="169" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#42a5f5">LOGICAL</text>
+      <text x="160" y="169" font-family="'Source Serif 4',serif" font-size="12" fill="#8a9bb5">How can architecture be organised?</text>
+      <text x="38" y="188" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Kinds of components needed — implementation-independent — multiple solution alternatives</text>
+
+      <text x="38" y="237" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#ba68c8">PHYSICAL</text>
+      <text x="160" y="237" font-family="'Source Serif 4',serif" font-size="12" fill="#8a9bb5">With what is it realised?</text>
+      <text x="38" y="256" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Allocation and implementation of physical components — concrete technology choices</text>
+
+      <!-- Down arrow on right -->
+      <line x1="664" y1="18" x2="664" y2="258" stroke="#f5a800" stroke-width="2" marker-end="url(#arr4)"/>
+      <text x="676" y="140" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5" transform="rotate(90,676,140)">Increasing Detail</text>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>Level</th><th>Key Question</th><th>Primary ADM Use</th></tr></thead>
+    <tbody>
+      <tr><td><strong style="color:#ff8f00">Contextual</strong></td><td>Why?</td><td>Phase P &amp; A — scope &amp; motivation</td></tr>
+      <tr><td><strong style="color:#66bb6a">Conceptual</strong></td><td>What?</td><td>Phase A &amp; B — service models</td></tr>
+      <tr><td><strong style="color:#42a5f5">Logical</strong></td><td>How organised?</td><td>Phases B, C, D — architecture design</td></tr>
+      <tr><td><strong style="color:#ba68c8">Physical</strong></td><td>With what?</td><td>Phases E &amp; F — solution realisation</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 5 -->
+<section id="s5">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2>Architecture Building Blocks</h2>
+  </div>
+  <p class="subtitle">ABBs &amp; SBBs — reusable, composable units of architecture capability</p>
+  <p>Architecture can be assembled from <strong>reusable components</strong> rather than designed from scratch every time. An <strong>ABB</strong> defines <em>what</em> is needed (logical); an <strong>SBB</strong> defines <em>how</em> it is built (physical). The same ABB can be fulfilled by different SBBs in different contexts.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 160" width="680" height="160" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr5" markerWidth="8" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0,0.5 L8,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <rect x="20"  y="30" width="270" height="100" rx="8" fill="#0a1a2a" stroke="#1565c0" stroke-width="2"/>
+      <rect x="390" y="30" width="270" height="100" rx="8" fill="#1a0a2a" stroke="#6a1b9a" stroke-width="2"/>
+
+      <text x="155" y="62" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="700" fill="#42a5f5">ABB</text>
+      <text x="155" y="80" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">Architecture Building Block</text>
+      <text x="155" y="99" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Logical / Conceptual</text>
+      <text x="155" y="116" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Defines WHAT is needed</text>
+
+      <text x="525" y="62" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="700" fill="#ba68c8">SBB</text>
+      <text x="525" y="80" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">Solution Building Block</text>
+      <text x="525" y="99" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Physical / Specific</text>
+      <text x="525" y="116" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Defines HOW it is built</text>
+
+      <line x1="290" y1="80" x2="388" y2="80" stroke="#f5a800" stroke-width="2" marker-end="url(#arr5)"/>
+      <text x="339" y="72" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">realised by</text>
+    </svg>
+  </div>
+
+  <h3>Building Block Hierarchy — Naval Vessel Example</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 680 220" width="680" height="220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr6" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#555"/>
+        </marker>
+      </defs>
+      <!-- Levels: widths get wider going down (more generic = broader) -->
+      <rect x="190" y="10"  width="300" height="42" rx="6" fill="#2a0a0a" stroke="#b71c1c" stroke-width="1.5"/>
+      <rect x="130" y="64"  width="420" height="42" rx="6" fill="#2a1a0a" stroke="#e65100" stroke-width="1.5"/>
+      <rect x="70"  y="118" width="540" height="42" rx="6" fill="#0a2a0a" stroke="#2e7d32" stroke-width="1.5"/>
+      <rect x="10"  y="172" width="660" height="42" rx="6" fill="#0a1a2a" stroke="#1565c0" stroke-width="1.5"/>
+
+      <text x="340" y="29"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#ef5350">LEVEL 1 — Capability Specific</text>
+      <text x="340" y="45"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">HMAS Hunter Class Frigate BB</text>
+      <text x="340" y="83"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#ff8f00">LEVEL 2 — Industry Specific</text>
+      <text x="340" y="99"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">Frigate Stability Hull BB</text>
+      <text x="340" y="137" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#66bb6a">LEVEL 3 — Common Systems Specific</text>
+      <text x="340" y="153" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">War Ship Engine BB</text>
+      <text x="340" y="191" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#42a5f5">LEVEL 4 — Generic Foundation SBBs</text>
+      <text x="340" y="207" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">Reusable base blocks — applicable across industries</text>
+
+      <!-- Down arrows on left -->
+      <line x1="340" y1="52" x2="340" y2="62" stroke="#555" stroke-width="1.2" marker-end="url(#arr6)"/>
+      <line x1="340" y1="106" x2="340" y2="116" stroke="#555" stroke-width="1.2" marker-end="url(#arr6)"/>
+      <line x1="340" y1="160" x2="340" y2="170" stroke="#555" stroke-width="1.2" marker-end="url(#arr6)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 6 -->
+<section id="s6">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2>Key Deliverables &amp; Artefacts</h2>
+  </div>
+  <p class="subtitle">The formal outputs produced at each stage of the ADM</p>
+  <p>Architecture deliverables serve two purposes: communicating the architecture to stakeholders, and creating a formal record that governs what gets built. The <strong>A.D.D.</strong> (Architecture Definition Document) is the central record, progressing from v0.1 draft to v1.0 approved.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 130" width="680" height="130" xmlns="http://www.w3.org/2000/svg">
+      <!-- Timeline bar -->
+      <rect x="20" y="58" width="640" height="6" rx="3" fill="rgba(245,168,0,0.15)"/>
+      <!-- Phase A -->
+      <circle cx="80"  cy="61" r="7" fill="#f5a800"/>
+      <text x="80"  y="42" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Phase A</text>
+      <text x="80"  y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Business Scenario</text>
+      <text x="80"  y="97" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">A.R.S. Draft</text>
+      <!-- Phases B-D -->
+      <circle cx="240" cy="61" r="7" fill="#f5a800"/>
+      <text x="240" y="42" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Phases B–D</text>
+      <text x="240" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">A.D.D. v0.1</text>
+      <text x="240" y="97" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Domain Designs</text>
+      <!-- Phases E-F -->
+      <circle cx="430" cy="61" r="7" fill="#f5a800"/>
+      <text x="430" y="42" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Phases E–F</text>
+      <text x="430" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">A.D.D. v1.0 Approved</text>
+      <text x="430" y="97" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Roadmap · I&amp;MP</text>
+      <!-- Phases G-H -->
+      <circle cx="610" cy="61" r="7" fill="#f5a800"/>
+      <text x="610" y="42" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" fill="#f5a800">Phases G–H</text>
+      <text x="610" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Design Contracts</text>
+      <text x="610" y="97" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Governance Reports</text>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>Deliverable</th><th>Phase</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A.R.S.</strong> — Architecture Requirements Specs</td><td>A</td><td>Capture and track requirements per phase</td></tr>
+      <tr><td><strong>A.D.D.</strong> — Architecture Definition Document</td><td>A–D</td><td>Central architecture design record</td></tr>
+      <tr><td><strong>I&amp;MP</strong> — Implementation &amp; Migration Plan</td><td>F</td><td>Work packages, projects, transition steps</td></tr>
+      <tr><td><strong>Architecture Design &amp; Definition Contracts</strong></td><td>G</td><td>Govern delivery between architects &amp; business</td></tr>
+      <tr><td><strong>Roadmap</strong></td><td>F</td><td>Work packages organised across T1, T2, T3</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 7 -->
+<section id="s7">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>RAW vs. SAW</h2>
+  </div>
+  <p class="subtitle">Scoping &amp; filtering architecture work</p>
+  <p><strong>RAW</strong> (Required Architecture Work) is the full, unfiltered picture of everything that could be done. <strong>SAW</strong> (Scoped Architecture Work) is the realistic, approved subset — filtered through stakeholder negotiation, principles, and trade-off analysis.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 140" width="680" height="140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr7" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+        <marker id="arr7r" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#8a9bb5"/>
+        </marker>
+      </defs>
+      <!-- RAW box -->
+      <rect x="20" y="20" width="160" height="80" rx="6" fill="#2a1a0a" stroke="#e65100" stroke-width="2"/>
+      <text x="100" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#ff8f00">RAW 1.0</text>
+      <text x="100" y="70" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Required Architecture</text>
+      <text x="100" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Work — full scope</text>
+
+      <!-- Filter diamond -->
+      <polygon points="280,60 320,20 360,60 320,100" fill="#1e2d4a" stroke="#f5a800" stroke-width="1.5"/>
+      <text x="320" y="56" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#f5a800">Filter</text>
+      <text x="320" y="70" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#f5a800">&amp; Scope</text>
+
+      <!-- SAW box -->
+      <rect x="440" y="20" width="160" height="80" rx="6" fill="#0a2a0a" stroke="#2e7d32" stroke-width="2"/>
+      <text x="520" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#66bb6a">SAW</text>
+      <text x="520" y="70" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Scoped Architecture</text>
+      <text x="520" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Work — approved subset</text>
+
+      <!-- Exception path below -->
+      <text x="320" y="125" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Exception → RAW 1.1 (updated scope)</text>
+
+      <!-- Arrows -->
+      <line x1="180" y1="60" x2="278" y2="60" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr7)"/>
+      <line x1="362" y1="60" x2="438" y2="60" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr7)"/>
+      <line x1="320" y1="100" x2="320" y2="116" stroke="#8a9bb5" stroke-width="1.2" marker-end="url(#arr7r)"/>
+    </svg>
+  </div>
+
+  <div class="callout"><strong>SLA BB</strong> — the Service Level Agreement Building Block is formally defined during RAW → SAW scoping, establishing performance and service expectations for each architectural component.</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 8 -->
+<section id="s8">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <h2>Change Requests Driving ADM Cycles</h2>
+  </div>
+  <p class="subtitle">Eight sources that trigger new ADM cycles</p>
+  <p>New architecture work is continuously initiated by change requests from a wide variety of sources — some top-down (board strategy), some bottom-up (developer discovery), some external (regulation, market shift). All eight ultimately feed into the same ADM process.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 280" width="680" height="280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr8" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0.5 L6,3 L0,5.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Centre target -->
+      <rect x="260" y="108" width="160" height="60" rx="8" fill="#e08000" stroke="#a05000" stroke-width="2"/>
+      <text x="340" y="133" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#0e1624">New ADM Cycle</text>
+      <text x="340" y="152" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#0e1624">triggered</text>
+
+      <!-- 8 trigger boxes arranged around -->
+      <!-- Top row -->
+      <rect x="20"  y="10" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="105" y="29" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">1. Sponsor / EA Team</text>
+      <text x="105" y="45" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Market signals</text>
+
+      <rect x="490" y="10" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="575" y="29" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">2. Business Stakeholder</text>
+      <text x="575" y="45" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Top-down request</text>
+
+      <!-- Upper-mid row -->
+      <rect x="20"  y="76" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="105" y="95" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">3. Domain Architect</text>
+      <text x="105" y="111" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Bottom-up opportunity</text>
+
+      <rect x="490" y="76" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="575" y="95" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">4. Market / Contractor</text>
+      <text x="575" y="111" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">External partner request</text>
+
+      <!-- Lower-mid row -->
+      <rect x="20"  y="142" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="105" y="161" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">5. Environmental Change</text>
+      <text x="105" y="177" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Regulatory / tech shift</text>
+
+      <rect x="490" y="142" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="575" y="161" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">6. Governance</text>
+      <text x="575" y="177" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Ad hoc / continuous monitoring</text>
+
+      <!-- Bottom row -->
+      <rect x="20"  y="214" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="105" y="233" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">7. Solution / Performance</text>
+      <text x="105" y="249" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Implementation change</text>
+
+      <rect x="490" y="214" width="170" height="46" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.25)" stroke-width="1"/>
+      <text x="575" y="233" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="600" fill="#f5a800">8. Concerns Backlog</text>
+      <text x="575" y="249" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Agile implementation context</text>
+
+      <!-- Arrows to centre -->
+      <line x1="190" y1="33"  x2="258" y2="125" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="490" y1="33"  x2="422" y2="125" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="190" y1="99"  x2="258" y2="133" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="490" y1="99"  x2="422" y2="133" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="190" y1="165" x2="258" y2="148" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="490" y1="165" x2="422" y2="148" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="190" y1="237" x2="258" y2="165" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+      <line x1="490" y1="237" x2="422" y2="165" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr8)" opacity="0.7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 9 -->
+<section id="s9">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <h2>Phase E vs. Phase F</h2>
+  </div>
+  <p class="subtitle">Opportunities &amp; Solutions vs. Migration Planning</p>
+  <p><strong>Phase E</strong> is analytical — surveying possible solutions, checking interoperability, selecting the best building blocks. <strong>Phase F</strong> is a planning phase — taking Phase E decisions and sequencing them into a concrete roadmap. Skipping E risks committing to a plan built on incompatible components.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 160" width="680" height="160" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr9" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+        <marker id="arr9b" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0.5 L6,3 L0,5.5 Z" fill="#42a5f5"/>
+        </marker>
+      </defs>
+      <!-- Phase E -->
+      <rect x="20" y="20" width="290" height="120" rx="8" fill="#0a1a2a" stroke="#1565c0" stroke-width="1.5"/>
+      <text x="165" y="47" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#42a5f5">Phase E — Opportunities &amp; Solutions</text>
+      <text x="165" y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">① Identify candidate SBBs</text>
+      <text x="165" y="86" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">② Check interoperability</text>
+      <text x="165" y="104" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">③ Identify conflicts / shared services</text>
+      <text x="165" y="122" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">④ Select compatible solutions</text>
+
+      <!-- Arrow between -->
+      <line x1="312" y1="80" x2="368" y2="80" stroke="#f5a800" stroke-width="2" marker-end="url(#arr9)"/>
+
+      <!-- Phase F -->
+      <rect x="370" y="20" width="290" height="120" rx="8" fill="#1a0a2a" stroke="#6a1b9a" stroke-width="1.5"/>
+      <text x="515" y="47" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#ba68c8">Phase F — Migration Planning</text>
+      <text x="515" y="71" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">① Plan Transition Architectures T1→T2→T3</text>
+      <text x="515" y="91" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">② Create Implementation &amp; Migration Plan</text>
+      <text x="515" y="111" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">③ Govern transition-based delivery</text>
+    </svg>
+  </div>
+
+  <h3>SBB Compatibility Stack</h3>
+  <p>Phase E evaluates solutions preferring generic, reusable components before committing to custom builds.</p>
+  <div class="stack-label">
+    <span class="stack-item">Foundation</span>
+    <span class="stack-arrow">→</span>
+    <span class="stack-item">Common</span>
+    <span class="stack-arrow">→</span>
+    <span class="stack-item">System</span>
+    <span class="stack-arrow">→</span>
+    <span class="stack-item">Industry</span>
+    <span class="stack-arrow">→</span>
+    <span class="stack-item">Organisation-Specific</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 10 -->
+<section id="s10">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <h2>Transition Architecture Planning</h2>
+  </div>
+  <p class="subtitle">T1 → T2 → T3 — intermediate waypoints across BDAT</p>
+  <p>Transforming an enterprise from Baseline to Target Architecture is rarely achievable in one leap. <strong>Transition Architectures</strong> define intermediate states — each coherent and deployable in its own right. All four BDAT domains must move in lockstep through each transition.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 220" width="680" height="220" xmlns="http://www.w3.org/2000/svg">
+      <!-- Column headers -->
+      <text x="110" y="18" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" fill="#8a9bb5">Baseline</text>
+      <text x="270" y="18" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#f5a800">T1</text>
+      <text x="420" y="18" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#f5a800">T2</text>
+      <text x="580" y="18" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#66bb6a">Target</text>
+
+      <!-- Row labels -->
+      <text x="32" y="60"  font-family="'Playfair Display',serif" font-size="11" font-weight="600" fill="#ff8f00">Business</text>
+      <text x="32" y="105" font-family="'Playfair Display',serif" font-size="11" font-weight="600" fill="#42a5f5">Data</text>
+      <text x="32" y="150" font-family="'Playfair Display',serif" font-size="11" font-weight="600" fill="#ba68c8">Application</text>
+      <text x="32" y="195" font-family="'Playfair Display',serif" font-size="11" font-weight="600" fill="#ef5350">Technology</text>
+
+      <!-- Gantt bars — Baseline -->
+      <rect x="90" y="44" width="60" height="22" rx="3" fill="rgba(245,168,0,0.2)" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <rect x="90" y="89" width="60" height="22" rx="3" fill="rgba(245,168,0,0.2)" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <rect x="90" y="134" width="60" height="22" rx="3" fill="rgba(245,168,0,0.2)" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <rect x="90" y="179" width="60" height="22" rx="3" fill="rgba(245,168,0,0.2)" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+
+      <!-- T1 bars -->
+      <rect x="160" y="44"  width="150" height="22" rx="3" fill="#f5a800" opacity="0.7"/>
+      <rect x="160" y="89"  width="150" height="22" rx="3" fill="#f5a800" opacity="0.7"/>
+      <rect x="160" y="134" width="150" height="22" rx="3" fill="#f5a800" opacity="0.7"/>
+      <rect x="160" y="179" width="150" height="22" rx="3" fill="#f5a800" opacity="0.7"/>
+
+      <!-- T2 bars -->
+      <rect x="320" y="44"  width="150" height="22" rx="3" fill="#e08000" opacity="0.6"/>
+      <rect x="320" y="89"  width="150" height="22" rx="3" fill="#e08000" opacity="0.6"/>
+      <rect x="320" y="134" width="150" height="22" rx="3" fill="#e08000" opacity="0.6"/>
+      <rect x="320" y="179" width="150" height="22" rx="3" fill="#e08000" opacity="0.6"/>
+
+      <!-- Target bars -->
+      <rect x="480" y="44"  width="170" height="22" rx="3" fill="#2e7d32" opacity="0.7"/>
+      <rect x="480" y="89"  width="170" height="22" rx="3" fill="#2e7d32" opacity="0.7"/>
+      <rect x="480" y="134" width="170" height="22" rx="3" fill="#2e7d32" opacity="0.7"/>
+      <rect x="480" y="179" width="170" height="22" rx="3" fill="#2e7d32" opacity="0.7"/>
+
+      <!-- Divider lines -->
+      <line x1="157" y1="30" x2="157" y2="210" stroke="rgba(245,168,0,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="317" y1="30" x2="317" y2="210" stroke="rgba(245,168,0,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="477" y1="30" x2="477" y2="210" stroke="rgba(245,168,0,0.15)" stroke-width="1" stroke-dasharray="3,3"/>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>Build Pattern</th><th>Description</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Greenfield</strong></td><td>New build from scratch</td><td>New platform deployment</td></tr>
+      <tr><td><strong>Quick Win</strong></td><td>Near-term, lower-risk</td><td>Achievable first increment</td></tr>
+      <tr><td><strong>Mainstream</strong></td><td>Core enterprise transformation</td><td>Primary delivery stream</td></tr>
+      <tr><td><strong>Reuse / Repeat</strong></td><td>Plan once, build many</td><td>Barracuda Class pattern</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 11 -->
+<section id="s11">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <h2>Agile EA vs. Traditional EA</h2>
+  </div>
+  <p class="subtitle">Choosing the right delivery approach for the project</p>
+  <p>TOGAF is not inherently waterfall. It supports both predictive and agile delivery styles. The decision comes down to two axes: how frequently the organisation needs to deliver changes, and how much the architecture changes with each delivery.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 560 420" width="560" height="420" xmlns="http://www.w3.org/2000/svg">
+      <!-- Quadrant background -->
+      <rect x="60" y="20"  width="230" height="190" rx="0" fill="rgba(46,125,50,0.08)"/>
+      <rect x="290" y="20"  width="230" height="190" rx="0" fill="rgba(198,40,40,0.08)"/>
+      <rect x="60" y="210" width="230" height="190" rx="0" fill="rgba(21,101,192,0.08)"/>
+      <rect x="290" y="210" width="230" height="190" rx="0" fill="rgba(106,27,154,0.08)"/>
+
+      <!-- Axes -->
+      <line x1="60" y1="400" x2="520" y2="400" stroke="#8a9bb5" stroke-width="1.5"/>
+      <line x1="60" y1="400" x2="60"  y2="20"  stroke="#8a9bb5" stroke-width="1.5"/>
+
+      <!-- Axis labels -->
+      <text x="290" y="418" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5">← Low Frequency of Delivery · High Frequency of Delivery →</text>
+      <text x="18" y="210" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#8a9bb5" transform="rotate(-90,18,210)">← Low Degree of Change · High Degree of Change →</text>
+
+      <!-- Quadrant labels -->
+      <text x="175" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#66bb6a">Infrastructure Projects</text>
+      <text x="175" y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">e.g. Airport, Highway</text>
+      <text x="175" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">→ Predictive ADM</text>
+
+      <text x="405" y="52" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#ef5350">Agile SW Development</text>
+      <text x="405" y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">e.g. CI/CD pipelines</text>
+      <text x="405" y="84" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">→ Iterative ADM</text>
+
+      <text x="175" y="252" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#42a5f5">Standard Construction</text>
+      <text x="175" y="268" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">e.g. Residential building</text>
+      <text x="175" y="284" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">→ Predictive ADM</text>
+
+      <text x="405" y="252" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#ba68c8">SW Maintenance</text>
+      <text x="405" y="268" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Continuous improvement</text>
+      <text x="405" y="284" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">→ Agile / Iterative</text>
+
+      <!-- Centre dividers -->
+      <line x1="290" y1="20" x2="290" y2="400" stroke="rgba(245,168,0,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="60"  y1="210" x2="520" y2="210" stroke="rgba(245,168,0,0.2)" stroke-width="1" stroke-dasharray="4,3"/>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>Approach</th><th>Best For</th><th>ADM Style</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Predictive</strong></td><td>Large infrastructure, low iteration</td><td>Full ADM cycle, single pass</td></tr>
+      <tr><td><strong>Agile / Iterative</strong></td><td>Software-intensive, high-change</td><td>Incremental ADM iterations</td></tr>
+      <tr><td><strong>Transition-based</strong></td><td>Bridge between both</td><td>Multiple defined increments T1, T2, T3</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 12 -->
+<section id="s12">
+  <div class="section-header">
+    <span class="section-num">12</span>
+    <h2>Enterprise Security Architecture</h2>
+  </div>
+  <p class="subtitle">Security as a parallel, continuous track across all ADM phases</p>
+  <p>Security is not a separate phase — it is a <strong>parallel, continuous track</strong> that runs alongside every ADM phase. At each phase the security architect asks: what risks are we introducing, and what controls are needed? By the time architecture reaches implementation, security has been designed in — not patched on.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 180" width="680" height="180" xmlns="http://www.w3.org/2000/svg">
+      <!-- ADM phases row -->
+      <text x="10" y="40" font-family="'Playfair Display',serif" font-size="10" fill="#8a9bb5">ADM</text>
+      <rect x="50" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="78" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">A</text>
+      <rect x="116" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="144" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">B</text>
+      <rect x="182" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="210" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">C</text>
+      <rect x="248" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="276" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">D</text>
+      <rect x="314" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="342" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">E</text>
+      <rect x="380" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="408" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">F</text>
+      <rect x="446" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="474" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">G</text>
+      <rect x="512" y="24" width="56" height="32" rx="4" fill="#f5a800" stroke="#c47d00" stroke-width="1.5"/>
+      <text x="540" y="45" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">H</text>
+
+      <!-- Bidirectional arrows down to security track -->
+      <line x1="78"  y1="58" x2="78"  y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="144" y1="58" x2="144" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="210" y1="58" x2="210" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="276" y1="58" x2="276" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="342" y1="58" x2="342" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="408" y1="58" x2="408" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="474" y1="58" x2="474" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="540" y1="58" x2="540" y2="88" stroke="rgba(245,168,0,0.4)" stroke-width="1" stroke-dasharray="3,2"/>
+
+      <!-- Security track -->
+      <rect x="50" y="90" width="518" height="36" rx="4" fill="#1a0a0a" stroke="#c62828" stroke-width="1.5"/>
+      <text x="309" y="113" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#ef5350">Security Architecture Track — runs across ALL phases A through H</text>
+
+      <!-- Three compliance outputs -->
+      <rect x="70"  y="148" width="170" height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <text x="155" y="165" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Risks Catalogue</text>
+      <rect x="255" y="148" width="170" height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <text x="340" y="165" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Risks Register</text>
+      <rect x="440" y="148" width="170" height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.2)" stroke-width="1"/>
+      <text x="525" y="165" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">ISM · ERM · ASCM</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 13 -->
+<section id="s13">
+  <div class="section-header">
+    <span class="section-num">13</span>
+    <h2>Repository &amp; Enterprise Continuum</h2>
+  </div>
+  <p class="subtitle">Institutional memory &amp; the building block classification system</p>
+  <p>The <strong>Architecture Repository</strong> is the EA function's institutional memory — storing all artefacts across every ADM cycle. The <strong>Enterprise Continuum</strong> classifies building blocks on a spectrum from generic (Foundation) to organisation-specific, enabling systematic reuse.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 240" width="680" height="240" xmlns="http://www.w3.org/2000/svg">
+      <!-- Central repository -->
+      <circle cx="340" cy="100" r="52" fill="#1a4a8a" stroke="#2979ff" stroke-width="2"/>
+      <text x="340" y="95" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#ffffff">Architecture</text>
+      <text x="340" y="112" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#ffffff">Repository</text>
+
+      <!-- Five components radiating out -->
+      <rect x="10"  y="10"  width="160" height="52" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="90"  y="31"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#f5a800">ARR</text>
+      <text x="90"  y="47"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Requirements Repository</text>
+
+      <rect x="510" y="10"  width="160" height="52" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="590" y="31"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#f5a800">Risks Catalogue</text>
+      <text x="590" y="47"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Identified risks</text>
+
+      <rect x="10"  y="178" width="160" height="52" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="90"  y="199" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#f5a800">Risks Register</text>
+      <text x="90"  y="215" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Tracked, active risks</text>
+
+      <rect x="510" y="178" width="160" height="52" rx="5" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="590" y="199" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#f5a800">Security Repository</text>
+      <text x="590" y="215" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Security artefacts</text>
+
+      <rect x="250" y="190" width="180" height="42" rx="5" fill="#0a2a0a" stroke="#2e7d32" stroke-width="1.5"/>
+      <text x="340" y="208" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#66bb6a">Enterprise Continuum</text>
+      <text x="340" y="224" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Classified building blocks → Reuse</text>
+
+      <!-- Connector lines -->
+      <line x1="170" y1="36"  x2="290" y2="82"  stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <line x1="510" y1="36"  x2="392" y2="82"  stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <line x1="170" y1="204" x2="290" y2="130" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <line x1="510" y1="204" x2="392" y2="130" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <line x1="340" y1="152" x2="340" y2="188" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="4,3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 14 -->
+<section id="s14">
+  <div class="section-header">
+    <span class="section-num">14</span>
+    <h2>Business Scenarios</h2>
+  </div>
+  <p class="subtitle">Translating stakeholder concerns into architecture requirements</p>
+  <p>Business Scenarios prevent the most common architecture failure — designing a solution to the wrong problem. They are a structured conversation between the Architecture Team and business stakeholders that produces requirements across all five domains before any design decisions are made.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 200" width="680" height="200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr14" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0.5 L6,3 L0,5.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Team box -->
+      <rect x="10" y="70" width="150" height="60" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1.5"/>
+      <text x="85" y="96" text-anchor="middle" font-family="'Playfair Display',serif" font-size="11" font-weight="700" fill="#f5a800">Architecture Team</text>
+      <text x="85" y="114" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">+ Business Stakeholders</text>
+
+      <!-- Business Scenario hub -->
+      <circle cx="290" cy="100" r="50" fill="#1a4a8a" stroke="#2979ff" stroke-width="2"/>
+      <text x="290" y="95"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#ffffff">Business</text>
+      <text x="290" y="112" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#ffffff">Scenario</text>
+
+      <!-- Five requirement outputs -->
+      <rect x="380" y="10"  width="130" height="30" rx="4" fill="#1e3a2a" stroke="#2e7d32" stroke-width="1"/>
+      <text x="445" y="30" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#66bb6a">Business Reqs</text>
+
+      <rect x="530" y="10"  width="130" height="30" rx="4" fill="#1a2a4a" stroke="#1565c0" stroke-width="1"/>
+      <text x="595" y="30" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#42a5f5">Data Reqs</text>
+
+      <rect x="530" y="85"  width="130" height="30" rx="4" fill="#2a1a3a" stroke="#6a1b9a" stroke-width="1"/>
+      <text x="595" y="105" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#ba68c8">Application Reqs</text>
+
+      <rect x="530" y="160" width="130" height="30" rx="4" fill="#3a1a1a" stroke="#c62828" stroke-width="1"/>
+      <text x="595" y="180" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#ef5350">Technology Reqs</text>
+
+      <rect x="380" y="160" width="130" height="30" rx="4" fill="#2a1010" stroke="#880e4f" stroke-width="1"/>
+      <text x="445" y="180" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#f06292">Security Reqs</text>
+
+      <!-- Arrows -->
+      <line x1="160" y1="100" x2="238" y2="100" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr14)"/>
+      <line x1="335" y1="68"  x2="378" y2="32"  stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr14)"/>
+      <line x1="340" y1="82"  x2="528" y2="24"  stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr14)"/>
+      <line x1="340" y1="100" x2="528" y2="100" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr14)"/>
+      <line x1="340" y1="118" x2="528" y2="170" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr14)"/>
+      <line x1="335" y1="132" x2="378" y2="168" stroke="#f5a800" stroke-width="1.2" marker-end="url(#arr14)"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 15 -->
+<section id="s15">
+  <div class="section-header">
+    <span class="section-num">15</span>
+    <h2>TOGAF® EA Viewpoints Library</h2>
+  </div>
+  <p class="subtitle">10th Edition — Catalogs, Matrices &amp; Diagrams across five domains</p>
+  <p>No single diagram communicates everything to every stakeholder. The Viewpoints Library provides standardised views — each designed for a specific audience — across five architecture domains. The 10th Edition added Business Model, Business Capability Map, and Value Stream Map as new viewpoints.</p>
+
+  <table>
+    <thead><tr><th>Domain</th><th>Catalogs</th><th>Matrices</th><th>Key Diagrams</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:#ff8f00">Preliminary</strong></td>
+        <td>Principles, Stakeholder</td>
+        <td>—</td>
+        <td>Value Chain, Solution Concept, <em>Business Model ★</em>, <em>Business Capability Map ★</em></td>
+      </tr>
+      <tr>
+        <td><strong style="color:#66bb6a">Business</strong></td>
+        <td>Org/Actor, Driver/Goal, Role, Location, Value Stream, <em>Business Glossary ★</em></td>
+        <td>Business Interaction, Strategy/Capability, Value Stream/Capability</td>
+        <td>Business Footprint, Process Flow, Business Event, Org Map</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#42a5f5">Data</strong></td>
+        <td>Data Entity/Component</td>
+        <td>Data Entity/Business Function, Application/Data</td>
+        <td>Conceptual Data, Logical Data, Data Security, Data Lifecycle</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#ba68c8">Application</strong></td>
+        <td>Application Portfolio, Interface</td>
+        <td>App/Organization, Role/Application, App/Function</td>
+        <td>Application Communication, App Use-Case, Software Engineering</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#ef5350">Technology</strong></td>
+        <td>Technology Standards, Technology Portfolio</td>
+        <td>Application/Technology</td>
+        <td>Environments/Locations, Platform Decomposition, Network/Communications</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:#8a9bb5;margin-top:8px;"><em>★ New in 10th Edition</em></p>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 16 -->
+<section id="s16">
+  <div class="section-header">
+    <span class="section-num">16</span>
+    <h2>Foundation Metamodel</h2>
+  </div>
+  <p class="subtitle">TOGAF's formal vocabulary — entities and relationships across all four domains</p>
+  <p>The Metamodel defines every type of architectural entity and how they relate to each other, enforcing a consistent vocabulary across teams. The key cross-domain chain is: <strong>Business Service → Application Service → Technology Service</strong>.</p>
+
+  <h3>General Entities (cross-domain)</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 680 80" width="680" height="80" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr16" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0.5 L6,3 L0,5.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- General entity pills -->
+      <rect x="10"  y="22" width="80"  height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="50"  y="40" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Principle</text>
+      <rect x="100" y="22" width="90"  height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="145" y="40" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Constraint</text>
+      <rect x="200" y="22" width="90"  height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="245" y="40" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Assumption</text>
+      <rect x="300" y="22" width="100" height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="350" y="40" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Requirement</text>
+      <rect x="410" y="22" width="60"  height="26" rx="4" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1"/>
+      <text x="440" y="40" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="11" fill="#d4cbbf">Gap</text>
+      <line x1="470" y1="35" x2="510" y2="35" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr16)"/>
+      <text x="490"  y="28" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9" fill="#8a9bb5">delivers</text>
+      <rect x="514" y="18" width="140" height="34" rx="5" fill="#e08000" stroke="#a05000" stroke-width="1.5"/>
+      <text x="584" y="40" text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#0e1624">Capability</text>
+    </svg>
+  </div>
+
+  <h3>Cross-Domain Relationships</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 680 140" width="680" height="140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr16b" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0.5 L6,3 L0,5.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Four domain columns -->
+      <rect x="10"  y="10" width="150" height="120" rx="6" fill="#0a2a0a" stroke="#2e7d32" stroke-width="1.5"/>
+      <rect x="180" y="10" width="150" height="120" rx="6" fill="#1a0a2a" stroke="#6a1b9a" stroke-width="1.5"/>
+      <rect x="350" y="10" width="150" height="120" rx="6" fill="#0a1a2a" stroke="#1565c0" stroke-width="1.5"/>
+      <rect x="520" y="10" width="150" height="120" rx="6" fill="#2a0a0a" stroke="#c62828" stroke-width="1.5"/>
+
+      <text x="85"  y="32" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#66bb6a">Business</text>
+      <text x="255" y="32" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#ba68c8">Application</text>
+      <text x="425" y="32" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#42a5f5">Data</text>
+      <text x="595" y="32" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#ef5350">Technology</text>
+
+      <text x="85"  y="58" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Business Service</text>
+      <text x="255" y="58" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Application Service</text>
+      <text x="425" y="58" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Data Entity</text>
+      <text x="595" y="58" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Technology Service</text>
+
+      <text x="85"  y="90" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">↕ automates / is</text>
+      <text x="255" y="90" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Logical App. Component</text>
+      <text x="425" y="90" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Logical Data Component</text>
+      <text x="595" y="90" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Logical Tech. Component</text>
+
+      <text x="255" y="118" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Physical App. Component</text>
+      <text x="425" y="118" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Physical Data Component</text>
+      <text x="595" y="118" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#d4cbbf">Physical Tech. Component</text>
+
+      <!-- Cross arrows between domains (top row) -->
+      <line x1="162" y1="55" x2="178" y2="55" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr16b)"/>
+      <text x="170" y="48" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="8" fill="#8a9bb5">automates</text>
+      <line x1="332" y1="55" x2="348" y2="55" stroke="#f5a800" stroke-width="1.5" marker-end="url(#arr16b)"/>
+      <text x="340" y="48" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="8" fill="#8a9bb5">implemented on</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 17 -->
+<section id="s17">
+  <div class="section-header">
+    <span class="section-num">17</span>
+    <h2>Content Framework by ADM Phase</h2>
+  </div>
+  <p class="subtitle">What should architecture documents contain at each stage?</p>
+  <p>The Content Framework maps the type and level of detail expected to each ADM phase. Early phases produce high-level visions; middle phases produce logical designs; later phases shift to physical solutions and governance.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 100" width="680" height="100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr17" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0.5 L7,3.5 L0,6.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Four bands -->
+      <rect x="10"  y="15" width="145" height="70" rx="6" fill="#2a1a0a" stroke="#e65100" stroke-width="1.5"/>
+      <rect x="175" y="15" width="145" height="70" rx="6" fill="#0a1a2a" stroke="#1565c0" stroke-width="1.5"/>
+      <rect x="340" y="15" width="145" height="70" rx="6" fill="#0a2a0a" stroke="#2e7d32" stroke-width="1.5"/>
+      <rect x="505" y="15" width="165" height="70" rx="6" fill="#1a0a2a" stroke="#6a1b9a" stroke-width="1.5"/>
+
+      <text x="82"  y="38" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#ff8f00">Contextual</text>
+      <text x="82"  y="54" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#8a9bb5">Phase A</text>
+      <text x="82"  y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Visions · Scenarios</text>
+      <text x="82"  y="80" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">A.R.S. spawned</text>
+
+      <text x="247" y="38" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#42a5f5">Logical Design</text>
+      <text x="247" y="54" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#8a9bb5">Phases B · C · D</text>
+      <text x="247" y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Architecture Designs</text>
+      <text x="247" y="80" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">v0.1 Drafts</text>
+
+      <text x="412" y="38" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#66bb6a">Physical Design</text>
+      <text x="412" y="54" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#8a9bb5">Phases E · F</text>
+      <text x="412" y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">SBB Selection</text>
+      <text x="412" y="80" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Roadmap · I&amp;MP</text>
+
+      <text x="587" y="38" text-anchor="middle" font-family="'Playfair Display',serif" font-size="10" font-weight="700" fill="#ba68c8">Governance</text>
+      <text x="587" y="54" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#8a9bb5">Phases G · H</text>
+      <text x="587" y="68" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Compliance · Contracts</text>
+      <text x="587" y="80" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="9.5" fill="#d4cbbf">Change Management</text>
+
+      <!-- Arrows -->
+      <line x1="157" y1="50" x2="173" y2="50" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr17)"/>
+      <line x1="322" y1="50" x2="338" y2="50" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr17)"/>
+      <line x1="487" y1="50" x2="503" y2="50" stroke="#f5a800" stroke-width="1.8" marker-end="url(#arr17)"/>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>Metamodel Level</th><th>Focus</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Level 1</strong> — Foundation Metamodel</td><td>Core entity types and relationships across all four domains</td></tr>
+      <tr><td><strong>Level 2</strong> — Extended Metamodel</td><td>Additional relationships and domain-specific entities</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ 18 -->
+<section id="s18">
+  <div class="section-header">
+    <span class="section-num">18</span>
+    <h2>Classes of Architecture Engagement</h2>
+  </div>
+  <p class="subtitle">Calibrating the level of EA involvement to the nature of the change</p>
+  <p>Not all architecture work warrants a full enterprise programme. The engagement class is determined by three questions — <em>why</em> the change is occurring, <em>when and how often</em> it is needed, and <em>what</em> the scope is. The answers determine which ADM phases to emphasise and how formal the governance should be.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 680 220" width="680" height="220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr18" markerWidth="6" markerHeight="6" refX="4.5" refY="3" orient="auto">
+          <path d="M0,0.5 L6,3 L0,5.5 Z" fill="#f5a800"/>
+        </marker>
+      </defs>
+      <!-- Three input boxes -->
+      <rect x="10"  y="10"  width="170" height="52" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1.5"/>
+      <text x="95"  y="33"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#f5a800">WHY?</text>
+      <text x="95"  y="51"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">What is the driver?</text>
+
+      <rect x="255" y="10"  width="170" height="52" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1.5"/>
+      <text x="340" y="33"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#f5a800">WHEN?</text>
+      <text x="340" y="51"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">How often is it needed?</text>
+
+      <rect x="500" y="10"  width="170" height="52" rx="6" fill="#1e2d4a" stroke="rgba(245,168,0,0.3)" stroke-width="1.5"/>
+      <text x="585" y="33"  text-anchor="middle" font-family="'Playfair Display',serif" font-size="12" font-weight="700" fill="#f5a800">WHAT?</text>
+      <text x="585" y="51"  text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#8a9bb5">Scope &amp; nature of change?</text>
+
+      <!-- Central class box -->
+      <rect x="215" y="100" width="250" height="52" rx="8" fill="#1a4a8a" stroke="#2979ff" stroke-width="2"/>
+      <text x="340" y="122" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#ffffff">Class of Architecture</text>
+      <text x="340" y="140" text-anchor="middle" font-family="'Playfair Display',serif" font-size="13" font-weight="700" fill="#ffffff">Engagement</text>
+
+      <!-- Three output boxes -->
+      <rect x="10"  y="180" width="190" height="34" rx="5" fill="#0a2a0a" stroke="#2e7d32" stroke-width="1"/>
+      <text x="105" y="201" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#66bb6a">ADM phases to emphasise</text>
+
+      <rect x="245" y="180" width="190" height="34" rx="5" fill="#1a2a4a" stroke="#1565c0" stroke-width="1"/>
+      <text x="340" y="201" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#42a5f5">How to tailor engagement</text>
+
+      <rect x="480" y="180" width="190" height="34" rx="5" fill="#1a0a2a" stroke="#6a1b9a" stroke-width="1"/>
+      <text x="575" y="201" text-anchor="middle" font-family="'Source Serif 4',serif" font-size="10" fill="#ba68c8">Governance approach</text>
+
+      <!-- Arrows in -->
+      <line x1="95"  y1="62"  x2="260" y2="110" stroke="#f5a800" stroke-width="1.3" marker-end="url(#arr18)"/>
+      <line x1="340" y1="62"  x2="340" y2="98"  stroke="#f5a800" stroke-width="1.3" marker-end="url(#arr18)"/>
+      <line x1="585" y1="62"  x2="420" y2="110" stroke="#f5a800" stroke-width="1.3" marker-end="url(#arr18)"/>
+      <!-- Arrows out -->
+      <line x1="255" y1="138" x2="128" y2="178" stroke="#f5a800" stroke-width="1.3" marker-end="url(#arr18)"/>
+      <line x1="340" y1="152" x2="340" y2="178" stroke="#f5a800" stroke-width="1.3" marker-end="url(#arr18)"/>
+      <line x1="425" y1="138" x2="552" y2="178" stroke="#f5a800" stroke-width="1.3" marker-end="url(#arr18)"/>
+    </svg>
+  </div>
+
+  <div class="callout">The engagement class determines how the ADM is applied — from <strong>lightweight advisory work</strong> on a small initiative through to a <strong>full enterprise re-architecture programme</strong> spanning multiple years.</div>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2019 WBISCT Pty Ltd / ALC Training · Diagrams © Axel Dancoisne · TOGAF® is a registered trademark of The Open Group</p>
+  <p style="margin-top:6px;">Based on the TOGAF® Standard, 10th Edition · v3.0 (2025)</p>
+</footer>
+
+</body>
+</html>
